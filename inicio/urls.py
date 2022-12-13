@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import home, tarea
+from .views import home, electrodomesticosview
 app_name = 'inicio'
 
 urlpatterns = [
     path('', home, name='inicio'),
-    path("tarea", tarea, name="tarea")
+    path("electrodomesticos/", electrodomesticosview, name="electrodomesticos")
 ]

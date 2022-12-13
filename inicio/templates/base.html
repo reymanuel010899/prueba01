@@ -3,6 +3,7 @@
 <html class="menu">
 <html lang="en">
   <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content=="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,8 +16,7 @@
     <link rel="stylesheet" type="text/css" href="css/estilos.css">
     <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <meta name="google" value="notranslate"/>
-    -<title>Side Menu</title>
-  
+    <title>Side Menu</title>
   <style>
   
   body {
@@ -57,7 +57,7 @@
     position: absolute;
     width: 17em;
     height: 100%;
-    top: 78px;
+    top: 55px;
     overflow: hidden;
     background-color: #f9f7f7;
     -webkit-transform: translateZ(0);
@@ -172,7 +172,7 @@
   
   
   </head>
-  <body>
+<body>
     <nav class="navbar navbar-expand-lg " style="background-color: #09f; ">
       
         <form class="d-flex" role="search" style="width: 50%; margin: auto;">
@@ -195,7 +195,7 @@
       </div>
     </nav>
  
-    <section class="app">
+    <section >
       <aside class="sidebar">
              <header>
            <a href=""><h2 style="text-align: center ; color:rgb(0, 0, 0);">REYSTORY</h2></a>
@@ -204,7 +204,7 @@
      <hr>
           <ul>
             <li>
-              <a href="#"><i class="ion-bag"></i> <span>ELECTRONICOS</span></a>
+              <a href="{% url 'inicio:electrodomesticos' %}"><i class="ion-bag"></i> <span>ELECTRONICOS</span></a>
               <ul class="nav-flyout">
                 <li>
                   <a href="#"><i class="ion-ios-color-filter-outline"></i>celulares</a>
@@ -336,10 +336,6 @@
         </nav>
       </aside>
     </section>
-    
-  </body>
-  </html>
-
     {% block content %}
     
     {% endblock content %}
