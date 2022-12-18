@@ -1,8 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container" style="margin: 50%;">
-<h1 style=" ">resultados</h1>
-</div>  
+<div class="container">
+    <section style="text-align: center;"><h1>electronicos</h1></section>
+    <div class="row">
+        {% for laptop in  laptops %}
+        <div class="col-md-3">
+            <a href="">
+            <div class="card" style="width: 18rem;">
+                <img src="{{laptop.avatar.url}} " class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{laptop.modelo}}</h5>
+                </a>
+                  <hr>
+                  <p class="card-text">{{laptop.titulo|truncatechars:100}} </p>
+                </div>
+          
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">{{laptop.precio}} </li>
+                  <li class="list-group-item">{{laptop.almacenamiento}} </li>
+                </ul>
+              </div>
+            
+
+        </div>
+          
+        {% endfor %}
+
+
+
+    </div>
+    
+</div>
 {% endblock content %}
 
 

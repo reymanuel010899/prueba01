@@ -32,6 +32,9 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     background-color: #fefefe;
+    overflow-x: hidden;
+    z-index: 1;
+  
   }
   
   a {
@@ -57,15 +60,26 @@
     position: absolute;
     width: 17em;
     height: 100%;
-    top: 55px;
+    top: 0px;
     overflow: hidden;
     background-color: #f9f7f7;
     -webkit-transform: translateZ(0);
     visibility: visible;
     -webkit-backface-visibility: hidden;
+
+   
+        
+        position: fixed;
+        z-index: 1;
+        top: 0px;
+        left: 0%;
+      
+        overflow-x: hidden;
+        padding-top: 0px;
+
   }
   .sidebar header {
-    background-color: rgb(250, 250, 250);
+    background-color: rgb(52, 86, 236);
     width: 100%;
     display: block;
     padding: 0.75em 1em;
@@ -76,7 +90,7 @@
   ----------------*/
   .sidebar-nav {
     position: fixed;
-    background-color: #fafafa;
+    background-color:#0482ff;
     height: 100%;
     font-weight: 400;
     font-size: 1.2em;
@@ -118,7 +132,7 @@
     display: block;
   }
   .sidebar-nav ul li a:hover {
-    background-color: rgba(250, 245, 245, 0.9);
+    background-color: rgba(15, 72, 246, 0.9);
     -webkit-transition: all 0.6s ease;
     -moz-transition: all 0.6s ease;
     transition: all 0.6s ease;
@@ -135,14 +149,14 @@
     font-family: ionicons;
     font-size: 0.5em;
     width: 10px;
-    color: rgb(251, 250, 250);
+    color: rgb(47, 78, 254);
     position: absolute;
     right: 0.75em;
     top: 45%;
   }
   .sidebar-nav .nav-flyout {
     position: absolute;
-    background-color: #f4f6f8;
+    background-color: #0482ff;
     z-index: 9;
     left: 2.5em;
     top: 0;
@@ -173,23 +187,29 @@
   
   </head>
 <body>
-    <nav class="navbar navbar-expand-lg " style="background-color: #09f; ">
+    <nav class="navbar navbar-expand-lg " style="background-color: #09f ; ">
       
-        <form class="d-flex" role="search" style="width: 50%; margin: auto;">
-        <select  aria-describedby="searchDropdownDescription"  class="nav-search-dropdown searchSelect nav-progressive-attrubute nav-progressive-search-dropdown" data-nav-digest="bc4g2gpX93q5i825SIMRprMtYdc=" data-nav-selected="0" id="searchDropdownBox" name="url" style="display: block; top: 2.5px; width: 200px; border-radius: 5px;" tabindex="0" title="Buscar en">
-        <option selected="selected" value="search-alias=aps">Todos los departamentos</option>
-        <option value="search-alias=arts-crafts-intl-ship">ELECTRONICOS</option>
-        <option value="search-alias=automotive-intl-ship">ROPAS DE HOMBRES</option>
-        <option value="search-alias=baby-products-intl-ship">ROPAS DE MUJER</option>
-        <option value="search-alias=beauty-intl-ship">ROPAS DE NIÑOS</option>
-        <option value="search-alias=movies-tv-intl-ship">ROPAS DE BEBE</option>
-        <option value="search-alias=computers-intl-ship">ELECTRODOMESTICOS</option>
-        <option value="search-alias=sporting-intl-ship">DEPORTES</option>
-        <option value="search-alias=electronics-intl-ship">ELECTRODOMESTICOS</option>
+        <form action=" {% url 'inicio:busqueda-contenido' %}" method="GET" class="d-flex" role="search" style="width: 50%; margin: auto;">
+          <div class="input-group mb-3">
+            <button type="button" class="btn btn-outline-secondary">Action</button>
+            <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">  
+            </button>
+            <ul class="dropdown-menu">
+              <select aria-describedby="searchDropdownDescription" class="nav-search-dropdown searchSelect nav-progressive-attrubute nav-progressive-search-dropdown" data-nav-digest="bc4g2gpX93q5i825SIMRprMtYdc=" data-nav-selected="0" id="searchDropdownBox" name="url" style="display: block; top: 2.5px;" tabindex="0" title="Buscar en">
+                <li><option selected="selected" value="search-alias=aps">Todos los departamentos</option></li>
+                <option value="electronicos">electronicos</option>
+                <option value="hombres" >ropas de hombres</option>
+                <option value="mujer">ropas de mujer</option>
+                <option value="niños">ropas de niños</option>
+                <option value="electrodomesticos">electrodomesticos</option>
+                <option value="deportes">deportes</option>
         
-    </select>
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
+            </select>
+            </ul>
+            <input type="text" class="form-control" name="contenido" aria-label="Text input with segmented dropdown button">
+          </div>
+           
+            <button class="btn btn-outline-success" style=" margin: 4px; height: 35px;" type="submit">Search</button>
           </form>
         </div>
       </div>
@@ -198,10 +218,10 @@
     <section >
       <aside class="sidebar">
              <header>
-           <a href=""><h2 style="text-align: center ; color:rgb(0, 0, 0);">REYSTORY</h2></a>
+           <a href="{% url 'inicio:inicio' %} "><h2 style="text-align: center ; color:rgb(0, 0, 0);">REYSTORY</h2></a>
           </header>
         <nav class="sidebar-nav">
-     <hr>
+ 
           <ul>
             <li>
               <a href="{% url 'inicio:electrodomesticos' %}"><i class="ion-bag"></i> <span>ELECTRONICOS</span></a>
@@ -327,6 +347,7 @@
               </ul>
             </li>
             <li>
+              
               <a href="#"><i class="ion-ios-medical-outline"></i> <span class="">CERRAR SECION</span></a>
               <ul class="nav-flyout">
                 
@@ -339,6 +360,19 @@
     {% block content %}
     
     {% endblock content %}
+    <div class="card text-center">
+      <div class="card-header">
+        Featured
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="{% url 'inicio:identificate' %} " class="btn btn-primary">identificate</a>
+      </div>
+      <div class="card-footer text-muted">
+      
+      </div>
+    </div>
     <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
