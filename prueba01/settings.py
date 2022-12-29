@@ -48,8 +48,8 @@ DJANGO_APPS = (
     
     
 )
-LOCAL_APPS = ('inicio',)
-THRE_PARTY_APPS = ()
+LOCAL_APPS = ('inicio','tiendaapi','carro_compra')
+THRE_PARTY_APPS = ('rest_framework',)
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THRE_PARTY_APPS
 

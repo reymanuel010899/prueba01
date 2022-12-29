@@ -1,0 +1,43 @@
+{% extends "detalle_base_carro.html" %}
+
+
+
+
+{% block content %}
+
+<div class="card mb-3">
+    <h1 style="text-align: center;">{{producto.modelo|title }} </h1>
+    <img src="{{producto.avatar.url}} " style="height: 1000px;" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{producto.precio}} </h5>
+      <p class="card-text">{{producto.titulo }} </p>
+      <p style="color: red;">Disponible: {{cantidad.cantida_stok}} </p>
+      <span style="font-size: 20px;">CANTIDAD: {{form.rating}}</span> 
+      <a href="?productoid={{producto.id}} " style="border-radius: 15px; height: 35px;" class="btn btn-primary">agregar al carrito</a>
+      <p class="card-text"><small class="text-muted"></small></p>
+    </div>
+  </div>
+
+<div class="a-image-container a-dynamic-image-container greyBackground" style="width:50%; height:1px;">
+    <div>
+        <h2 style="color:rgb(0, 0, 0) ;">RELACIONADAS....</h2>
+            <div class="container">
+            <div class="row" >
+                {% for valor in lista  %}
+                    <div class="col-md-3" style="width: 350px; padding:30px ;">
+                        <div class="card"   style='height: 100%;'>
+                        <a href="{% url 'inicio:detalle-productos'  valor.id %} "><img src="{{valor.avatar.url}} " style="height: 200px; width: 100%;"  class=" card-img-top" alt=""> </a>
+                        <div class="card-body">
+                            <h6>{{valor.modelo}} </h6>
+                            <h5 class="card-title">{{producto.precio}} </h5>
+                        </div>                      
+                        </div>
+                    </div>
+                    
+                {% endfor %} 
+            </div> 
+            </div>
+    </div>
+</div>    
+
+{% endblock content %}

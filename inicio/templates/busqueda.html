@@ -5,9 +5,11 @@
     <section style=""><h1>resultado</h1></section>
     <div class="row">
         {% for electronico in  electronicos %}
-        <div class="col-md-3">
-            <div class="card  style="width: 18rem;">
-                <img src="{{electronico.avatar.url}} " class="card-img-top" alt="...">
+        <div class="col-md-3" style="padding:30px ;">
+            <div class="card"   style='height: 100%;'>
+              <a href=" {% url 'inicio:detalle-productos' electronico.id %}">
+                <img src="{{electronico.avatar.url}}"  style="height: 200px; width: 100%;"  class="card-img-top" alt="...">
+              </a>
                 <div class="card-body">
                   {% if electronico.modelo %}
                     <h5 class="card-title" style="padding-top: 30px;">{{electronico.modelo}} </h5>
@@ -18,11 +20,13 @@
                   <p class="card-text">{{electronico.titulo | truncatechars:50 }} </p>
                 </div>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">{{electronico.precio}} </li>
-                  <li class="list-group-item">{{electronico.procesador}} </li>
+                  <li class="list-group-item" style="color: blue;">{{electronico.precio}} </li>
+                  
                   {% if electronico.tamaño %}
                     <li class="list-group-item">tamaño: {{electronico.tamaño}} </li>
-                  {% elif electronico. %}
+                  {% elif electronico.procesador %}  
+                    <li class="list-group-item">{{electronico.procesador}} </li>
+                  {% elif electronico.tamaño %}
                     <li class="list-group-item">tamaño: {{electronico.tamaño}} </li>
                   {% endif %}
                 </ul>

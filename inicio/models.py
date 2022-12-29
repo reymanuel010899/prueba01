@@ -1,10 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .maneger import categora_manayer
 class categoria(models.Model):
     nombre = models.CharField(max_length=30)
+    objects =categora_manayer()
 
     def __str__(self):
-        return self.nombre
+        return str(self.id) +'-'+ self.nombre
 
 # Create your models here.
 
@@ -23,22 +25,24 @@ COLOR = (
 )
 
 class electronicomodel(models.Model):
-        categoria = models.ForeignKey(categoria, on_delete=models.CASCADE)
+        categoria = models.ForeignKey(categoria, related_name='categorias', on_delete=models.CASCADE)
         titulo = models.CharField(max_length=300, blank=True)
         modelo = models.CharField(max_length=50, blank=True)
         marca = models.CharField(max_length=30, blank=True)
         avatar = models.FileField(upload_to='electronico', blank=True)
         procesador = models.CharField(max_length=50, blank=True) 
         precio = models.CharField(max_length=15, blank=True)
+        in_portada = models.BooleanField(default=False)
         tipo = models.CharField(max_length=50, blank=True)
         tamaño = models.CharField(max_length=5, blank=True)
         detalles = models.TextField(blank=True)
         almacenamiento = models.CharField(max_length=3,blank=True, choices=ALMACENAR)
         rating = models.PositiveIntegerField(blank=True)
         created = models.DateTimeField(auto_now_add=True)
+        
 
         def __str__(self) -> str:
-            return self.modelo
+            return str(self.id) + '-' + self.modelo
         
 class celularesmodels(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
