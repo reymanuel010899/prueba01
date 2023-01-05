@@ -1,36 +1,56 @@
 {% extends "base.html" %}
 {% block content %}
+
+
+
 <div class="container">
     <section style="text-align: center;"><h1>electronicos</h1></section>
     <div class="row">
-        {% for laptop in  laptops %}
-        <div class="col-md-3">
-            <a href="">
-            <div class="card" style="width: 18rem;">
-                <img src="{{laptop.avatar.url}} " class="card-img-top" alt="...">
+        {% for laptop in  page.object_list %}
+        <div class="col-md-2"  style="width: 350px; padding:30px ;">
+            <a href=" {% url 'inicio:detalle-productos' laptop.id %}  ">
+            <div class="card" style="padding-top: 15px; width: 18rem;">
+                <img src="{{laptop.avatar.url}} "  style="height: 200px; width: 100%;" class="card-img-top" alt="...">
+              </a>
                 <div class="card-body">
                   <h5 class="card-title">{{laptop.modelo}}</h5>
-                </a>
                   <hr>
                   <p class="card-text">{{laptop.titulo|truncatechars:100}} </p>
                 </div>
           
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item">{{laptop.precio}} </li>
-                  <li class="list-group-item">{{laptop.almacenamiento}} </li>
+                  <li class="list-group-item">{{laptop.precio}}</li>
+                
+                     
+                     {% if  laptop.almacenamiento %}
+                     <li class="list-group-item">almacenamiento: {{laptop.almacenamiento}} </li>
+                     {% elif laptop.tamaño %}
+                     <li class="list-group-item">tamaño: {{laptop.tamaño}} </li>
+                     {% endif  %}
                 </ul>
               </div>
-            
-
-        </div>
+            </div>
           
-        {% endfor %}
+         {% endfor %}
+    </div> 
+    <nav aria-label="Page navigation example">
+      <p>page: {{page.number}} / {{page.paginator.num_pages}} </p>
+      <ul class="pagination">
+       {% if page.has_previous %}
+        <li class="page-item"><a class="page-link" href="{% url 'inicio:electrodomesticos' %}?page={{page.previous_page_number}} ">atras</a></li>
+        {% endif %}
+        {% if page.number != '1' %}
+         <li class="page-item"><a class="page-link" href="?page={{page.number}} ">{{page.number}} </a></li>
+        {% endif %}
 
-
-
-    </div>
-    
+        {% if page.has_next %}
+        <li class="page-item"><a class="page-link" href=" {% url 'inicio:electrodomesticos' %}?page={{page.next_page_number }} ">Next</a></li>
+        {% endif %}
+      </ul>
+    </nav>
 </div>
+
+
 {% endblock content %}
 
 

@@ -24,12 +24,18 @@ COLOR = (
     ('O','OTROS')
 )
 
+
 class electronicomodel(models.Model):
-        categoria = models.ForeignKey(categoria, related_name='categorias', on_delete=models.CASCADE)
+        
+        categoria = models.ForeignKey(categoria, related_name='categorias', on_delete=models.CASCADE)        
         titulo = models.CharField(max_length=300, blank=True)
         modelo = models.CharField(max_length=50, blank=True)
         marca = models.CharField(max_length=30, blank=True)
         avatar = models.FileField(upload_to='electronico', blank=True)
+        imagen1 = models.ImageField(upload_to='ímagen', blank=True, null=True)
+        imagen2 = models.ImageField(upload_to='ímagen', blank=True, null=True)
+        imagen3 = models.ImageField(upload_to='ímagen', blank=True, null=True)
+        imagen4 = models.ImageField(upload_to='ímagen', blank=True, null=True)
         procesador = models.CharField(max_length=50, blank=True) 
         precio = models.CharField(max_length=15, blank=True)
         in_portada = models.BooleanField(default=False)
@@ -39,11 +45,26 @@ class electronicomodel(models.Model):
         almacenamiento = models.CharField(max_length=3,blank=True, choices=ALMACENAR)
         rating = models.PositiveIntegerField(blank=True)
         created = models.DateTimeField(auto_now_add=True)
+
         
 
         def __str__(self) -> str:
             return str(self.id) + '-' + self.modelo
-        
+
+        @property
+        def get_vistas_count(self):
+            return self.vistas_set.all().count()  
+
+class vistas(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    articulo = models.ForeignKey(electronicomodel,  on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)   
+
+    def __str__(self) -> str:
+        return str(self.id)+ '-' + self.user.username
+
+    
+
 class celularesmodels(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     tipo = models.ManyToManyField(electronicomodel, blank=True, related_name='celular')

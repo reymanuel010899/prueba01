@@ -1,19 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="container" style=" margin-left: 300px; width: 400px; background-color: aqua;">
+  <div class="row" style="width:  40%;">
+    {% for vista in vistas  %}
+    <div class="col-md-2" style="margin: 0%; padding: auto; width: 50%;">
+      <div class="card" style="">
+        <span>{{vista.articulo.modelo}}</span>
+      <a href="{% url 'inicio:detalle-faborito' vista.id %}">
+      <img src="{{vista.articulo.avatar.url}} "  style="height: 250px; width: 100%;"  alt="">
+    </a>
+    </div>
+    </div>
+   
+      
+    {% endfor %}
+  </div>
+</div>
 
 
-{% for porta in portada %}
-<img src="{{porta.avatar.url}} " alt="">
 
-{% endfor %}
 
 <div class="container">
+  <div>
     <div class="row">
         {% for laptop in  laptops %}
+        
         <div class="col-md-3">
             <div class="card" style="width: 18rem;">
-                <img src="{{laptop.avatar.url}} " class="card-img-top" alt="...">
+                <img src="{{laptop.avatar.url}} "  style="height: 200px; width: 100%;"  class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -25,15 +40,16 @@
                 </ul>
                 <div class="card-body">
                   <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
+                  <a href="#" class="card-link"></a>
                 </div>
               </div>
 
-        </div>
+ </div>
+
+        
           
         {% endfor %}
-
     </div>
-    
 </div>
+
 {% endblock content %}
